@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import home from '@/page/home'
-import exam1 from '@/page/exam1'
-import result from '@/page/result'
+import home from '@/components/home'
+import addPage from '@/page/address'
 
 Vue.use(Router)
 
@@ -11,24 +9,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: HelloWorld,
-      redirect: '/home'
+      name: 'home',
+      component: home,
+      redirect: '/add'
     },
     {
-      path: '/home',
-      component: home
-    },
-    {
-      path: '/exam1',
-      name: 'exam1',
-      component: exam1,
-      props: (route) => {id: route.query.id}
-    },
-    {
-      name: 'Result',
-      path: '/result',
-      component: result
+      path: '/add',
+      name: 'address',
+      component: addPage,
+      props: (route) => {addId: route.query.addId}
     }
   ]
 })
