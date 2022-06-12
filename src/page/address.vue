@@ -14,6 +14,10 @@
         :border-around="false"
       />
     </div>
+
+    <div class="foot-group">
+      <span style="font-family: cursive;font-size: large;font-weight: bolder">有事请向我诉说，我与群众心连心</span>
+    </div>
   </div>
 </template>
 <script>
@@ -93,6 +97,9 @@ export default {
         width: 100%;
     }
     .button-group{
-        margin: 50px 0;
+        margin: 20px 0;
+    }
+    .foot-group {
+      margin: 10px 0;
     }
 </style>
