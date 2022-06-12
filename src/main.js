@@ -7,13 +7,14 @@ import axios from 'axios'
 // import Mint from 'mint-ui'
 // import 'mint-ui/lib/style.css'
 import iView from 'iview';
-import 'iview/dist/styles/iview.css' 
-import store from './store/' 
+import 'iview/dist/styles/iview.css'
+import store from './store/'
+import "vue-easytable/libs/theme-default/index.css"
+import { VeTable } from "vue-easytable"
 
 Vue.use(iView);
-
+Vue.use(VeTable);
 Vue.prototype.axios = axios;
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

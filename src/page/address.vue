@@ -1,52 +1,91 @@
 <template>
-    <div class="address-page">
-        <div class="button-group">
-            <span>省市区县: {{ proCityDistName }}</span>
-            <span>网格信息: {{ areaName }}</span>
-            <span>网格长: {{ areaManageName }}</span>
-            <span>支部书记: {{ branchPeoName }}</span>
-            <span>社区民警: {{ socialPoliceName }}</span>
-        </div>
+  <div class="address-page">
+    <ve-table
+      :columns="columns"
+      :table-data="tableData"
+      :border-around="false"
+      :cell-span-option="cellSpanOption"
+    />
+
+    <div class="button-group">
+      <ve-table
+        :columns="columns2"
+        :table-data="tableData2"
+        :border-around="false"
+      />
     </div>
+  </div>
 </template>
 <script>
-    export default {
-      props: {
-        addId: {
-          required: true
+export default {
+  props: {
+    addId: {
+      required: true
+    }
+  },
+  data () {
+    return {
+      cellSpanOption: {
+        bodyCellSpan: this.bodyCellSpan,
+      },
+      columns: [
+        { field: "name", key: "b", title: "", align: "center" },
+        { field: "mobile", key: "c", title: "", align: "center" }
+      ],
+      columns2: [
+        { field: "name", key: "d", title: "工作职责", align: "center" },
+      ],
+      tableData: [],
+      tableData2: [
+        {
+          name: "政策法规宣传  疫情群防群控"
+        },
+        {
+          name: "流动人员管控  矛盾排查化解"
+        },
+        {
+          name: "安全维稳管理  急难险重突击"
+        },
+        {
+          name: "提供便民服务  消除安全隐患"
+        },
+        {
+          name: "爱国主义教育  倡树文明新风"
+        },
+      ],
+    }
+  },
+  created () {
+    this.findAdd()
+  },
+  mounted() {
+    this.findAdd()
+  },
+  methods: {
+    bodyCellSpan({ row, column, rowIndex }) {
+      if (rowIndex === 0 || rowIndex === 1) {
+        if (column.field === "name") {
+          return {
+            rowspan: 1,
+            colspan: 2,
+          };
         }
-      },
-      data () {
-        return {
-          areaName: '',
-          areaManageName: '',
-          proCityDistName: '',
-          branchPeoName: '',
-          socialPoliceName: ''
-        }
-      },
-      created () {
-        this.findAdd()
-      },
-      mounted() {
-        this.findAdd()
-      },
-      updated() {
-        this.findAdd()
-      },
-      methods: {
-        findAdd () {
-          fetch("https://backend.wzwg.org.cn/address?showId=" + this.$route.query.addId
-          ).then(res => res.json()).then(res => {
-            this.areaName = res.areaName
-            this.areaManageName = res.areaManageName
-            this.proCityDistName = res.proCityDistName
-            this.branchPeoName = res.branchPeoName
-            this.socialPoliceName = res.socialPoliceName
-          })
+        else {
+          return {
+            rowspan: 0,
+            colspan: 0,
+          };
         }
       }
+    },
+    findAdd () {
+      fetch("http://localhost:9527/address?showId=" + this.$route.query.addId
+      ).then(res => res.json()).then(res => {
+        this.tableData = res.data
+      })
     }
+  }
+}
 </script>
 <style scoped>
     .address-page{
@@ -54,24 +93,6 @@
         width: 100%;
     }
     .button-group{
-        padding: 0px 15px;
-        position: relative;
-        transform: translateY(-50%);
-        top: 50%;
-    }
-    .button-group span{
-        display: block;
-        margin-bottom: 15px;
-        width: 100%;
-        height: 40px;
-        border-radius: 6px;
-        color: #656b79;
-        background-color: #f6f8fa;
-        box-shadow: 0 0 1px #b8bbbf;
-    }
-    .button-group span a{
-        line-height: 40px;
-        color: #656b79;
-        display: block;
+        margin: 50px 0;
     }
 </style>
