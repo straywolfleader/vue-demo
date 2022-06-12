@@ -79,7 +79,7 @@ export default {
       }
     },
     findAdd () {
-      fetch("http://localhost:9527/address?showId=" + this.$route.query.addId
+      fetch("https://backend.wzwg.org.cn/address?showId=" + this.$route.query.addId
       ).then(res => res.json()).then(res => {
         this.tableData = res.data
       })
