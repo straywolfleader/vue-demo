@@ -18,9 +18,14 @@
     <div class="foot-group">
       <span style="font-family: cursive;font-size: large;font-weight: bolder">有事请向我诉说，我与群众心连心</span>
     </div>
+
+    <div class="img-group">
+      <img :src="imgUrl">
+    </div>
   </div>
 </template>
 <script>
+import imgUrl from "../assets/qr.jpg"
 export default {
   props: {
     addId: {
@@ -29,6 +34,7 @@ export default {
   },
   data () {
     return {
+      imgUrl: imgUrl,
       cellSpanOption: {
         bodyCellSpan: this.bodyCellSpan,
       },
@@ -97,9 +103,14 @@ export default {
         width: 100%;
     }
     .button-group{
-        margin: 20px 0;
+        margin: 0 0;
     }
     .foot-group {
-      margin: 10px 0;
+      margin: 10px 0 0 0;
+    }
+    .img-group img {
+      text-align: center;
+      height: 50%;
+      width: 50%;
     }
 </style>
